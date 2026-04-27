@@ -1,0 +1,11 @@
+frame = "buttonless" # full (default), none, transparent, buttonless
+# maximized = true
+tabs = true
+title-hidden = true
+
+[font]
+normal = ["JetBrainsMono Nerd Font"]
+size = 16
+
+[font.features]
+"JetBrainsMono Nerd Font" = ["+ss02", "+cv04", "+cv16", "+cv18", "+cv19", "+cv20"]

@@ -1,0 +1,159 @@
+# This is a demo config to showcase some of the most important commands.
+# It is meant to be changed and configured, as it is intentionally kept sparse.
+# For a (much) more advanced configuration example see my dotfiles:
+# https://github.com/FelixKratz/dotfiles
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar Appearance #####
+# Configuring the general appearance of the bar.
+# These are only some of the options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+# 0x40000000
+sketchybar --bar position=top height=40 blur_radius=30 color=0xE61e1e2e
+
+##### Changing Defaults #####
+# We now change some default values, which are applied to all further items.
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="JetBrainsMono Nerd Font Propo:Bold:17.0"
+  label.font="JetBrains Mono:Bold:14.0"
+  icon.color=0xffcdd6f4
+  label.color=0xffcdd6f4
+  # icon.color=0xffffffff
+  # label.color=0xffffffff
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+##### Adding Mission Control Space Indicators #####
+# Let's add some mission control spaces:
+# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
+# to indicate active and available mission control spaces.
+
+# SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+# for i in "${!SPACE_ICONS[@]}"
+# do
+#   sid="$(($i+1))"
+#   space=(
+#     space="$sid"
+#     icon="${SPACE_ICONS[i]}"
+#     icon.padding_left=7
+#     icon.padding_right=7
+#     background.color=0x40ffffff
+#     background.corner_radius=5
+#     background.height=25
+#     label.drawing=off
+#     script="$PLUGIN_DIR/space.sh"
+#     click_script="yabai -m space --focus $sid"
+#   )
+#   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
+# done
+
+# Aerospace workspace widget integration
+sketchybar --add event aerospace_workspace_change
+sketchybar --add event aerospace_mode_change
+sketchybar --add event caffeine_update
+for sid in $(aerospace list-workspaces --all); do
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+        --set space.$sid \
+        background.corner_radius=5 \
+        background.height=20 \
+        background.drawing=off \
+        label="$sid" \
+        icon.padding_left=0 \
+        icon.padding_right=0 \
+        label.padding_left=5 \
+        label.padding_right=5 \
+        click_script="aerospace workspace $sid" \
+        script="$CONFIG_DIR/plugins/aerospace.sh"
+done
+
+##### Adding Left Items #####
+# We add some regular items to the left side of the bar, where
+# only the properties deviating from the current defaults need to be set
+
+sketchybar --add item chevron left \
+           --set chevron icon= label.drawing=off icon.drawing=on \
+           padding_right=0 \
+           --add item front_app left \
+           --set front_app icon.drawing=on script="$PLUGIN_DIR/front_app.sh" \
+           padding_left=0 \
+           --subscribe front_app front_app_switched aerospace_workspace_change \
+           --add item aerospace_mode_separator left \
+           padding_left=1 padding_right=1 \
+           --set aerospace_mode_separator icon= label.drawing=off icon.drawing=off \
+           --add item aerospace_mode left \
+           --set aerospace_mode icon.drawing=on label.drawing=on script="$PLUGIN_DIR/aerospace_mode.sh" \
+           --subscribe aerospace_mode aerospace_mode_change
+
+##### Adding Right Items #####
+# In the same way as the left items we can add items to the right side.
+# Additional position (e.g. center) are available, see:
+# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+
+# Some items refresh on a fixed cycle, e.g. the clock runs its script once
+# every 10s. Other items respond to events they subscribe to, e.g. the
+# volume.sh script is only executed once an actual change in system audio
+# volume is registered. More info about the event system can be found here:
+# https://felixkratz.github.io/SketchyBar/config/events
+
+sketchybar --add item clock right \
+           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
+           click_script="open -a Calendar" \
+           --add item clock_separator right \
+           --set clock_separator icon= label.drawing=off icon.drawing=on \
+           padding_left=1 padding_right=1 \
+           --add item brightness right \
+           --set brightness script="$PLUGIN_DIR/brightness.sh" \
+           click_script="open x-apple.systempreferences:com.apple.preference.displays" \
+           --subscribe brightness brightness_change \
+           --add item brightness_separator right \
+           --set brightness_separator icon= label.drawing=off icon.drawing=on \
+           padding_left=1 padding_right=1 \
+           --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+           click_script="open x-apple.systempreferences:com.apple.preference.sound" \
+           --subscribe volume volume_change \
+           --add item volume_separator right \
+           --set volume_separator icon= label.drawing=off icon.drawing=on \
+           padding_left=1 padding_right=1 \
+           --add item wifi right \
+           --set wifi script="$PLUGIN_DIR/wifi.sh" \
+           click_script="open x-apple.systempreferences:com.apple.preference.network" \
+           --subscribe wifi wifi_change \
+           --add item wifi_separator right \
+           --set wifi_separator icon= label.drawing=off icon.drawing=on \
+           padding_left=1 padding_right=1 \
+           --add item battery right \
+           --set battery update_freq=60 script="$PLUGIN_DIR/battery.sh" \
+           click_script="open x-apple.systempreferences:com.apple.preference.battery" \
+           --subscribe battery system_woke power_source_change \
+           --add item battery_separator right \
+           --set battery_separator icon= label.drawing=off icon.drawing=on \
+           padding_left=1 padding_right=1 \
+           --add item caffeine right \
+           --subscribe caffeine system_woke caffeine_update \
+           --set caffeine icon.drawing=on label.drawing=off script="$PLUGIN_DIR/caffeine.sh" \
+           click_script="BUTTON=1 $PLUGIN_DIR/caffeine.sh" \
+           --add item caffeine_separator right \
+           --set caffeine_separator icon= label.drawing=off icon.drawing=on \
+           padding_left=1 padding_right=1 \
+           --add item weather right \
+           --set weather icon.drawing=on label.drawing=on script="$PLUGIN_DIR/weather.sh" update_freq=600 \
+           click_script="open -a Weather" \
+           --subscribe weather system_woke
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update

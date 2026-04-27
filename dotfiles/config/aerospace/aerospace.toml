@@ -1,0 +1,331 @@
+config-version = 2
+
+start-at-login = true
+
+after-startup-command = [
+  'exec-and-forget sketchybar',
+  'exec-and-forget borders active_color=0xffcdd6f4 inactive_color=0xff313244 width=5',
+]
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  '~/.config/aerospace/scripts/workspace-change.sh; borders active_color=0xffcdd6f4 inactive_color=0xff313244 width=5',
+]
+on-focus-changed = [
+  "exec-and-forget borders active_color=0xffcdd6f4 inactive_color=0xff313244 width=5",
+]
+
+# -----------------------------
+# Behavior
+# -----------------------------
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+automatically-unhide-macos-hidden-apps = true
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+accordion-padding = 30
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+# -----------------------------
+# Key mapping
+# -----------------------------
+[key-mapping]
+preset = 'qwerty'
+
+# -----------------------------
+# Gaps
+# -----------------------------
+[gaps]
+inner.horizontal = 15
+inner.vertical = 15
+outer.left = 15
+outer.right = 15
+# outer.top = 20
+outer.top = [{ monitor.'^LG.*$' = 50 }, 20]
+outer.bottom = 15
+
+# -----------------------------
+# Main bindings
+# -----------------------------
+[mode.main.binding]
+
+# Layout
+alt-shift-minus = 'layout tiles horizontal vertical'
+alt-shift-backslash = 'layout accordion horizontal vertical'
+alt-f = 'layout floating tiling'
+
+# Focus
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Move
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Resize
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+
+# Fullscreen
+alt-space = 'fullscreen'
+alt-shift-space = 'macos-native-fullscreen'
+
+# Minimize
+alt-semicolon = 'macos-native-minimize'
+
+# Window control
+alt-c = 'close'
+alt-shift-c = 'close --quit-if-last-window'
+alt-x = 'exec-and-forget hs -c "hs.application.frontmostApplication():kill9()"'
+alt-shift-x = '''exec-and-forget hs -c "
+local app = hs.application.frontmostApplication()
+if app then
+  local name = app:name()
+  hs.execute(\"killall \" .. string.format(\"%q\", name))
+end
+"'''
+
+# Workspace navigation
+alt-comma = 'workspace prev'
+alt-period = 'workspace next'
+
+# Monitor focus
+alt-left = 'focus-monitor prev'
+alt-right = 'focus-monitor next'
+alt-shift-left = 'move-node-to-monitor --focus-follows-window left'
+alt-shift-right = 'move-node-to-monitor --focus-follows-window right'
+
+# Workspaces (clean loop-style mental model)
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+alt-shift-1 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 1'
+alt-shift-2 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 2'
+alt-shift-3 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 3'
+alt-shift-4 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 4'
+alt-shift-5 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 5'
+alt-shift-6 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 6'
+alt-shift-7 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 7'
+alt-shift-8 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 8'
+alt-shift-9 = 'exec-and-forget ~/.config/aerospace/scripts/move-and-update.sh 9'
+
+# Quick actions
+alt-enter = 'exec-and-forget open -na kitty'
+alt-slash = 'exec-and-forget open -a Raycast'
+alt-shift-comma = 'exec-and-forget open -a "System Settings"'
+alt-shift-r = 'exec-and-forget aerospace reload-config && sketchybar --reload'
+alt-shift-a = 'exec-and-forget ~/.config/aerospace/scripts/toggle-caffeniate.sh'
+
+# Modes
+alt-a = 'exec-and-forget ~/.config/aerospace/scripts/set-mode.sh apps'
+alt-s = 'exec-and-forget ~/.config/aerospace/scripts/set-mode.sh screenshot'
+alt-q = 'exec-and-forget ~/.config/aerospace/scripts/set-mode.sh session'
+alt-m = 'exec-and-forget ~/.config/aerospace/scripts/set-mode.sh media'
+
+# -----------------------------
+# Apps mode
+# -----------------------------
+[mode.apps.binding]
+esc = ['exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh', 'mode main']
+
+w = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a "Google Chrome"',
+  'mode main',
+]
+c = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a neovide',
+  'mode main',
+]
+f = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a Finder',
+  'mode main',
+]
+shift-f = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a LocalSend',
+  'mode main',
+]
+i = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a Gimp',
+  'mode main',
+]
+m = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a Ferdium',
+  'mode main',
+]
+r = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a OBS',
+  'mode main',
+]
+s = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a Spotify',
+  'mode main',
+]
+v = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && open -a Shotcut',
+  'mode main',
+]
+
+# -----------------------------
+# Session mode
+# -----------------------------
+[mode.session.binding]
+esc = ['exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh', 'mode main']
+
+l = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && hs -c "hs.caffeinate.logOut()"',
+  'mode main',
+]
+s = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && hs -c "hs.caffeinate.shutdownSystem()"',
+  'mode main',
+]
+r = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && hs -c "hs.caffeinate.restartSystem()"',
+  'mode main',
+]
+shift-l = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && hs -c "hs.caffeinate.lockScreen()"',
+  'mode main',
+]
+shift-s = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && hs -c "hs.caffeinate.systemSleep()"',
+  'mode main',
+]
+
+# -----------------------------
+# Screenshot mode
+# -----------------------------
+[mode.screenshot.binding]
+esc = ['exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh', 'mode main']
+
+# Clipboard
+a = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && screencapture -c -w',
+  'mode main',
+]
+s = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && screencapture -c -i',
+  'mode main',
+]
+f = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && screencapture -c',
+  'mode main',
+]
+
+# File
+shift-a = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && screencapture -w ~/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png',
+  'mode main',
+]
+shift-s = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && screencapture -i ~/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png',
+  'mode main',
+]
+shift-f = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && screencapture ~/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png',
+  'mode main',
+]
+
+# -----------------------------
+# Media mode
+# -----------------------------
+[mode.media.binding]
+esc = ['exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh', 'mode main']
+
+space = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && nowplaying-cli togglePlayPause',
+  'mode main',
+]
+n = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && nowplaying-cli next',
+  'mode main',
+]
+p = [
+  'exec-and-forget ~/.config/aerospace/scripts/mode-reset.sh && nowplaying-cli previous',
+  'mode main',
+]
+
+# -----------------------------
+# Window rules
+# -----------------------------
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Preview|QuickTime Player'
+run = 'layout floating'
+
+# -----------------------------
+# Workspace roles (intentional)
+# -----------------------------
+# 1 → Dev / Coding
+# 2 → Web browsing
+# 3 → File manager / File Sharing
+# 4 → Screen recording
+# 5 → Image / Video editing
+# 6 → Messaging
+# 7 → Music
+# 8 → System / Settings
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Neovide'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Google Chrome'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Finder'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'LocalSend'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'OBS'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Gimp|Shotcut'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Ferdium|Telegram'
+run = 'move-node-to-workspace 6'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Spotify'
+run = 'move-node-to-workspace 7'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'System Settings|Karabiner-Elements|Karabiner-EventViewer'
+run = ['move-node-to-workspace 8', 'layout floating']
+
+# -----------------------------
+# Monitor assignment
+# -----------------------------
+[workspace-to-monitor-force-assignment]
+1 = '^LG.*$'
+2 = '^LG.*$'
+3 = '^LG.*$'
+4 = '^LG.*$'
+5 = '^LG.*$'
+6 = '^LG.*$'
+7 = '^LG.*$'
+8 = '^LG.*$'
+9 = '^Built-in.*$'

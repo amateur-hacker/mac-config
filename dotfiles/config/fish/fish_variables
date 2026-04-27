@@ -1,0 +1,4 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR __fish_initialized:4300
+SETUVAR fish_user_paths:/Users/amateur_hacker/\x2elocal/bin\x1e/Users/amateur_hacker/\x2elocal/share/bun/bin\x1e/Users/amateur_hacker/\x2elocal/share/cargo/bin\x1e/var/lib/flatpak/exports/bin\x1e/run/current\x2dsystem/sw/bin

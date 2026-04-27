@@ -1,0 +1,17 @@
+color:
+  when: auto
+  theme: custom
+icons:
+  when: auto
+sorting:
+  dir-grouping: first
+# Possible values: permission, user, group, context, size, date, name, inode, links, git
+blocks:
+  - permission
+  - user
+  # - group
+  - size
+  - date
+  - name
+# header: false
+# no-symlink: false
