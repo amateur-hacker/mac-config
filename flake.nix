@@ -56,6 +56,7 @@
           "borders"
           "clipboard"
           "displayplacer"
+          "iina"
           "mole"
           "mpv"
           "nowplaying-cli"

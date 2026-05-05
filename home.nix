@@ -111,6 +111,7 @@ in
     php
     pm2
     python315
+    pipx
     ruby
     rustc
     sqlite
