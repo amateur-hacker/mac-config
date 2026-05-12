@@ -45,9 +45,10 @@ in
     bat
     bottom
     cbonsai
+    cloudflared
+    coreutils
     cowsay
     curl
-    coreutils
     duf
     dysk
     fastfetch
