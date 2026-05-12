@@ -64,6 +64,7 @@ in
     less
     lolcat
     lsd
+    ngrok
     perl5Packages.FileMimeInfo
     pipes-rs
     p7zip

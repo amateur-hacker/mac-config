@@ -56,7 +56,6 @@
           "borders"
           "clipboard"
           "displayplacer"
-          "iina"
           "mole"
           "mpv"
           "nowplaying-cli"
@@ -79,6 +78,7 @@
           "gimp"
           "google-chrome"
           "hammerspoon"
+          "iina"
           "karabiner-elements"
           "kitty"
           "localsend"
@@ -119,7 +119,7 @@
           # NSGlobalDomain._HIHideMenuBar = false;
       };
 
-      security.pam.services.sudo_local.touchIdAuth = true;
+      security.pam.services.sudo_local.touchIdAuth = false;
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
