@@ -115,7 +115,6 @@ in
     pm2
     python315
     pipx
-    qwen-code
     ruby
     rustc
     sqlite
