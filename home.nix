@@ -87,7 +87,7 @@ in
     util-linux
     wget
     xdg-ninja
-    yazi
+    # yazi
     yq
     yt-dlp-light
     zip
@@ -111,7 +111,7 @@ in
     ninja
     nodejs
     ollama
-    opencode
+    # opencode
     php
     pm2
     python315

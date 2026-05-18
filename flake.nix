@@ -51,6 +51,8 @@
           # CLI Tools (only work when install via brew)
           "bitwarden-cli"
           "cava"
+          "opencode"
+          "yazi"
           # GUI Apps
           "bookokrat"
           "borders"
