@@ -16,6 +16,7 @@ let
     git = "git";
     kitty = "kitty";
     lsd = "lsd";
+    mpv = "mpv";
     neovide = "neovide";
     nvim = "nvim";
     nix = "nix";
