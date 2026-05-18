@@ -313,6 +313,10 @@ if.app-name-regex-substring = 'Spotify'
 run = 'move-node-to-workspace 7'
 
 [[on-window-detected]]
+if.app-name-regex-substring = 'IINA'
+run = ['layout floating']
+
+[[on-window-detected]]
 if.app-name-regex-substring = 'System Settings|Karabiner-Elements|Karabiner-EventViewer'
 run = ['move-node-to-workspace 8', 'layout floating']
 
