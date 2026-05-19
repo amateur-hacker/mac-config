@@ -25,7 +25,7 @@ alias rm='trash-put -iv'
 alias rrm='command rm'
 alias cat='bat'
 alias vim='nvim'
-alias locate='plocate'
+# alias locate='plocate' # Linux only
 alias ls='lsd -al'
 alias tree='lsd -a --tree'
 
