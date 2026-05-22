@@ -265,7 +265,7 @@ p = [
 # -----------------------------
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'Preview|QuickTime Player'
+if.app-name-regex-substring = 'Preview|QuickTime Player|mpv|IINA'
 run = 'layout floating'
 
 # -----------------------------
@@ -274,11 +274,12 @@ run = 'layout floating'
 # 1 → Dev / Coding
 # 2 → Web browsing
 # 3 → File manager / File Sharing
-# 4 → Screen recording
+# 4 → Content Production
 # 5 → Image / Video editing
 # 6 → Messaging
 # 7 → Music
 # 8 → System / Settings
+# 9 -> Additional
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Neovide'
@@ -297,7 +298,7 @@ if.app-name-regex-substring = 'LocalSend'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'OBS'
+if.app-name-regex-substring = 'OBS|Voicebox|AutoSubs'
 run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
@@ -311,10 +312,6 @@ run = 'move-node-to-workspace 6'
 [[on-window-detected]]
 if.app-name-regex-substring = 'Spotify'
 run = 'move-node-to-workspace 7'
-
-[[on-window-detected]]
-if.app-name-regex-substring = 'mpv|IINA'
-run = ['layout floating']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'System Settings|Karabiner-Elements|Karabiner-EventViewer'
