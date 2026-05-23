@@ -62,6 +62,9 @@ download = [
   { run = "ya emit download --open %S", desc = "Download and open" },
   { run = "ya emit download %S", desc = "Download" },
 ]
+view = [
+  { run = 'mpv --keep-open=yes --loop-file=inf --background-color=0/0/0/0 %s', desc = "Image Viewer", for = "macos" },
+]
 
 [open]
 rules = [
@@ -83,7 +86,8 @@ rules = [
   ] },
   # Image
   { mime = "image/*", use = [
-    "open",
+    "view",
+    "image",
     "reveal",
   ] },
   # Media
