@@ -125,12 +125,14 @@ in
     (builtins.mapAttrs (name: subpath: {
       source = createSymlink "${dotfiles}/config/${subpath}";
       recursive = true;
-    # force = true;
     }) configs)
     // {
       "opencode/config.json".source =
         createSymlink "${dotfiles}/config/opencode/config.json";
-    };
+
+      "karabiner/karabiner.json".source =
+        createSymlink "${dotfiles}/config/karabiner/karabiner.json";
+  };
 
   home.file =
     (builtins.mapAttrs (name: cfg: {
