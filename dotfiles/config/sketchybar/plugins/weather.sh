@@ -6,7 +6,8 @@ temp=$(curl -s "wttr.in?format=%t" | tr -d '+')
 hour=$(date +%H)
 
 is_invalid() {
-  echo "$1" | grep -Eqi "unknown|error|not available"
+  echo "$1" | grep -Eqi \
+    "unknown|error|not available|render failed|no current condition data available"
 }
 
 if [ "$hour" -ge 6 ] && [ "$hour" -lt 18 ]; then
