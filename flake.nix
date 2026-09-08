@@ -42,9 +42,12 @@
 
       homebrew = {
         enable = true;
-        taps = [
+        taps = map (tap: {
+          name = tap;
+          trusted = true;
+        }) [
           "nikitabobko/tap"
-          "FelixKratz/formulae"
+          "felixkratz/formulae"
           "mediosz/tap"
         ];
         brews = [
@@ -53,6 +56,7 @@
           "cava"
           "opencode"
           "yazi"
+          "yt-dlp"
           # GUI Apps
           "bookokrat"
           "borders"

@@ -1,7 +1,7 @@
 { config, lib, inputs, pkgs, ... }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/Documents/mac-config/dotfiles";
+  dotfiles = "${config.home.homeDirectory}/Documents/my-repos/mac-config/dotfiles";
 
   createSymlink = path:
     config.lib.file.mkOutOfStoreSymlink path;
@@ -28,9 +28,9 @@ let
   };
 
   homeDotfiles = {
-    ".hammerspoon" = { path = "${dotfiles}/home/.hammerspoon"; recursive = true; };
+    ".hammerspoon" = { path = "${dotfiles}/home/.hammerspoon"; recursive = true; force = true; };
     ".hushlogin".path = "${dotfiles}/home/.hushlogin";
-    "Pictures/wallpapers" = { path = "${dotfiles}/pictures/wallpapers"; recursive = true; };
+    "Pictures/wallpapers" = { path = "${dotfiles}/pictures/wallpapers"; recursive = true; force = true; };
   };
 
 in
@@ -59,6 +59,7 @@ in
     fzf
     geoip
     gowall
+    herdr
     httpie
     imagemagick
     inxi
@@ -89,7 +90,7 @@ in
     xdg-ninja
     # yazi
     yq
-    yt-dlp-light
+    # yt-dlp-light
     zip
     zoxide
 
@@ -117,7 +118,7 @@ in
     python315
     pipx
     ruby
-    rustc
+    rustup
     sqlite
   ];
 
@@ -125,13 +126,18 @@ in
     (builtins.mapAttrs (name: subpath: {
       source = createSymlink "${dotfiles}/config/${subpath}";
       recursive = true;
+      force = true;
     }) configs)
     // {
-      "opencode/config.json".source =
-        createSymlink "${dotfiles}/config/opencode/config.json";
+      "opencode/config.json" = {
+        source = createSymlink "${dotfiles}/config/opencode/config.json";
+        force = true;
+      };
 
-      "karabiner/karabiner.json".source =
-        createSymlink "${dotfiles}/config/karabiner/karabiner.json";
+      "karabiner/karabiner.json" = {
+        source = createSymlink "${dotfiles}/config/karabiner/karabiner.json";
+        force = true;
+      };
   };
 
   home.file =
