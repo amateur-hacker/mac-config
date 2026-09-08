@@ -10,9 +10,19 @@ Status:children_add(function(self)
 	end
 end, 3300, Status.LEFT)
 
+-- Header:children_add(function()
+-- 	if ya.target_family() ~= "unix" then
+-- 		return ui.Line({})
+-- 	end
+-- 	return ui.Span(ya.user_name() .. "@" .. ya.host_name() .. ":"):fg("blue")
+-- end, 500, Header.LEFT)
+
 Header:children_add(function()
 	if ya.target_family() ~= "unix" then
 		return ui.Line({})
 	end
-	return ui.Span(ya.user_name() .. "@" .. ya.host_name() .. ":"):fg("magenta")
+
+	local hostname = ya.host_name():gsub("%.local$", "")
+
+	return ui.Span(ya.user_name() .. "@" .. hostname .. ":"):fg("blue")
 end, 500, Header.LEFT)
