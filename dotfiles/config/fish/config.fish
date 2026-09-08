@@ -68,3 +68,6 @@ starship init fish | source
 zoxide init --cmd cd fish | source
 eval (/opt/homebrew/bin/brew shellenv)
 fzf --fish | FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source
+
+# Added by Antigravity IDE
+fish_add_path /Users/amateur_hacker/.antigravity-ide/antigravity-ide/bin
