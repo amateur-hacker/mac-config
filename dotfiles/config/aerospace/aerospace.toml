@@ -82,8 +82,10 @@ alt-shift-space = 'macos-native-fullscreen'
 alt-semicolon = 'macos-native-minimize'
 
 # Window control
-alt-c = 'close'
-alt-shift-c = 'close --quit-if-last-window'
+# alt-c = 'close'
+# alt-shift-c = 'close --quit-if-last-window'
+alt-c = 'exec-and-forget hs -c "hs.application.frontmostApplication():hide()"'
+alt-shift-c = 'exec-and-forget hs -c "hs.application.frontmostApplication():kill()"'
 alt-x = 'exec-and-forget hs -c "hs.application.frontmostApplication():kill9()"'
 alt-shift-x = '''exec-and-forget hs -c "
 local app = hs.application.frontmostApplication()
