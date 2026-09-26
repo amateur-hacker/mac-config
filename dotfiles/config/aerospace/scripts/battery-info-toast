@@ -1,0 +1,17 @@
+#!/bin/bash
+
+hs -c '
+hs.alert.closeAll(0)
+local p = io.popen("system_profiler SPPowerDataType 2>/dev/null")
+local s = p:read("*a")
+p:close()
+
+local h = s:match("Maximum Capacity:%s*(.-)%%")
+local c = s:match("Cycle Count:%s*(%d+)")
+
+hs.alert.show(
+    "Battery Health: " .. (h or "N/A") .. "%\n" ..
+    "Cycle Count: " .. (c or "N/A"),
+    3
+)
+'
