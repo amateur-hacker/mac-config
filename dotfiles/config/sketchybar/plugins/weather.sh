@@ -7,7 +7,7 @@ hour=$(date +%H)
 
 is_invalid() {
   echo "$1" | grep -Eqi \
-    "unknown|error|not available|render failed|no current condition data available"
+    "unknown|error|not available|render failed|no current condition data available|not found"
 }
 
 if [ "$hour" -ge 6 ] && [ "$hour" -lt 18 ]; then
