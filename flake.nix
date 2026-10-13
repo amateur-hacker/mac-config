@@ -67,6 +67,7 @@
           "nowplaying-cli"
           "portaudio"
           "sketchybar"
+          "syncthing"
           "vercel-cli"
         ];
         casks = [
