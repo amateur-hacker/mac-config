@@ -68,9 +68,11 @@
           "portaudio"
           "sketchybar"
           "syncthing"
-          "vercel-cli"
+          # "vercel-cli"
         ];
         casks = [
+          # CLI Tools
+          "antigravity-cli"
           # GUI Apps
           # "aldente"
           "aerospace"
@@ -92,6 +94,7 @@
           # "monitorcontrol"
           "neovide-app"
           "obs"
+          "opencode-desktop"
           "raycast"
           # "shortcat"
           "shotcut"
