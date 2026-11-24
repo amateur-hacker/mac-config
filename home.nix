@@ -95,6 +95,7 @@ in
     zoxide
 
     # Dev Tools
+    android-tools
     bun
     # llvmPackages.clang
     python314Packages.cmake

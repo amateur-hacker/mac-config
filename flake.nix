@@ -73,6 +73,8 @@
         casks = [
           # CLI Tools
           "antigravity-cli"
+          # Development
+          "android-studio"
           # GUI Apps
           # "aldente"
           "aerospace"
@@ -80,13 +82,16 @@
           "alt-tab"
           "battery"
           "bitwarden"
+          "brave-browser"
           # "caffeine"
           # "camtasia"
           "docker-desktop"
           "ferdium"
+          "fluidvoice"
           "gimp"
           "google-chrome"
           "hammerspoon"
+          "herdr-app"
           "iina"
           "karabiner-elements"
           "kitty"
@@ -95,10 +100,12 @@
           "neovide-app"
           "obs"
           "opencode-desktop"
+          "openscreen"
           "raycast"
           # "shortcat"
           "shotcut"
           "spotify"
+          # "superwhisper"
           "telegram-desktop"
           # "swipeaerospace"
           # "ubersicht"

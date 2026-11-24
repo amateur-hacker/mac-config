@@ -1,0 +1,47 @@
+#!/bin/bash
+
+hs -c '
+hs.alert.closeAll(0)
+local p = io.popen("curl -sL --max-time 10 https://essays.levelupwithfriend.in/ 2>/dev/null")
+if not p then
+  hs.alert.show("Levelupwithfriend essays\nFounding members: offline", 3)
+  return
+end
+local s = p:read("*a")
+p:close()
+
+if not s or s == "" then
+  hs.alert.show("Levelupwithfriend essays\nFounding members: offline", 3)
+  return
+end
+
+local count = s:match("aria%-valuenow=\"(%d+)\"")
+local total = s:match("aria%-valuemax=\"(%d+)\"")
+
+if not count then
+  count = s:match("aria%-label=\"(%d+) of %d+ founding members\"")
+end
+if not total then
+  total = s:match("aria%-label=\"%d+ of (%d+) founding members\"")
+end
+
+if not count or not total then
+  hs.alert.show("Levelupwithfriend essays\nFounding members: parse failed", 3)
+  return
+end
+
+local function comma(n)
+  local formatted = tostring(n)
+  while true do
+    local k
+    formatted, k = formatted:gsub("^(-?%d+)(%d%d%d)", "%1,%2")
+    if k == 0 then break end
+  end
+  return formatted
+end
+
+hs.alert.show(
+    "Levelupwithfriend essays\nFounding members: " .. comma(count) .. " of " .. comma(total),
+    3
+)
+'

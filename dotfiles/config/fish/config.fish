@@ -13,11 +13,17 @@ end
 
 # Add to path
 ensure_dir $HOME/.local/bin
-# fish_add_path $HOME/.local/bin $HOME/.local/share/bun/bin $HOME/.local/share/cargo/bin /var/lib/flatpak/exports/bin
 # First line removes the path; second line sets it.  Without the first line,
 # your path gets massive and fish becomes very slow.
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/.local/share/bun/bin $HOME/.local/share/cargo/bin /var/lib/flatpak/exports/bin /run/current-system/sw/bin $fish_user_paths
+
+# Android development (SDK installed by Android Studio on first launch)
+set -gx ANDROID_HOME $HOME/Library/Android/sdk
+fish_add_path $ANDROID_HOME/platform-tools $ANDROID_HOME/emulator $ANDROID_HOME/cmdline-tools/latest/bin
+
+# Antigravity IDE
+fish_add_path /Users/amateur_hacker/.antigravity-ide/antigravity-ide/bin
 
 # Setup vi mode keybindings and configure defaults
 function fish_user_key_bindings
@@ -68,6 +74,3 @@ starship init fish | source
 zoxide init --cmd cd fish | source
 eval (/opt/homebrew/bin/brew shellenv)
 fzf --fish | FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source
-
-# Added by Antigravity IDE
-fish_add_path /Users/amateur_hacker/.antigravity-ide/antigravity-ide/bin

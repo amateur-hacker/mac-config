@@ -133,6 +133,7 @@ alt-shift-comma = 'exec-and-forget open -a "System Settings"'
 alt-shift-r = 'exec-and-forget aerospace reload-config && sketchybar --reload'
 alt-shift-a = 'exec-and-forget ~/.config/aerospace/scripts/toggle-caffeniate.sh'
 alt-shift-b = 'exec-and-forget ~/.config/aerospace/scripts/battery-info-toast'
+alt-shift-i = 'exec-and-forget ~/.config/aerospace/scripts/founding-members-toast'
 
 # Modes
 alt-a = 'exec-and-forget ~/.config/aerospace/scripts/set-mode.sh apps'
